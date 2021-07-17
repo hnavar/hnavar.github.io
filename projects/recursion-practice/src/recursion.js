@@ -58,10 +58,23 @@ var sumBelow = function(n) {
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 var range = function(x, y) {
  var rangeArray = [];
+ let maxValue = (x > y) ? x : y;
+ let minValue = (y > x) ? x : y;
   if (x === y) {
     return rangeArray;
-  } return rangeArray.concat(range(x + 1, y));
+  }
+  if (minValue + 1 === maxValue) {
+    return rangeArray;
+  }
+   rangeArray.push(minValue + 1);
+   if(x > y) {
+     return rangeArray.concat(range(minValue + 1, maxValue)).reverse();
+   }
+  return rangeArray.concat(range(minValue + 1, maxValue));
 };
+
+range(9, 1);
+
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
@@ -69,21 +82,64 @@ var range = function(x, y) {
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  //base cases
+  if(exp === 0) {
+    return 1;
+  }
+  if(exp === 1) {
+    return base;
+  } 
+  if(exp === -1) {
+    return 1/base
+  }
+  //recursive cases
+
+  if (base < 0 && exp > 2) {
+    return base * exponent(base, exp - 1);
+  }
+  if (exp < 0) {
+   return exponent(base, exp + 1) / base
+  }
+  if (exp >  0) {
+   return  base * exponent(base, exp - 1);
+  }
 };
+
 
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if (n === 1) {
+    return true;
+  }
+  if (n === 0) {
+    return false;
+  }
+  if (n % 2 !== 0) {
+    return false;
+  }
+ return powerOfTwo(n / 2);
 };
-
 // 9. Write a function that accepts a string a reverses it.
-var reverse = function(string) {
+let reverse = function(string) {
+  //base case
+  if (string.length === 0)
+  return "";
+  //recursive case
+  return reverse(string.substr(1)) + string.charAt(0);
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  string = string.toUpperCase().replace(/\s+/g, '');
+  if(string.length === 0 || string.length === 1) {
+    return true;
+  } else if(string[0].toLowerCase() !== string[string.length - 1].toLowerCase()) {
+    return false;
+    }
+  return palindrome(string.substring(1, string.length - 1));
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -127,6 +183,14 @@ var gcd = function(x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+  //base case 
+  if (str1[0] !== str2[0]) {
+  return false; 
+  }
+  if(str1[0] === str2[0] && str1.length === 0 && str2.length === 0) {
+    return true;
+  } //recursive call
+    return compareStr(str1.slice(1), str2.slice(1));
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
@@ -260,6 +324,7 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
