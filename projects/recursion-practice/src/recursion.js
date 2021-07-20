@@ -217,18 +217,34 @@ var reverseArr = function (array) {
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length) {
-  
+  if (length === 0) return [];
+  var list = buildList(value, length-1);
+  list.push(value);
+  return list;
 };
 
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function(array, value) {
-};
+  if (array.length === 0) {
+    return 0;
+  } 
+  if (array[0] === value) {
+    return 1 + countOccurrence(array.slice(1, array.length), value);
+    } else {
+      return countOccurrence(array.slice(1, array.length), value);
+    }
+  };
+
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
+if (array.length === 0) {
+  return [];
+} 
+ return [callback(array[0])].concat(rMap(array.slice(1), callback));
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -270,11 +286,18 @@ var nthFibo = function(n) {
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function(input) {
+  if (input.length === 0) {
+    return [];
+  } return [input[0].toUpperCase()].concat(capitalizeWords(input.slice(1)));
 };
+
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
 var capitalizeFirst = function(array) {
+ if (array.length === 0) {
+    return [];
+  } return [array[0][0].toUpperCase().concat(array[0].slice(1))].concat(capitalizeFirst(array.slice(1)));
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -296,7 +319,17 @@ var flatten = function(arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
+var letterTally = function(str, obj = {}) {
+    if (str.length === 0) {
+    return obj;
+  } 
+  if (!obj[str[0]]) {
+     obj[str[0]] = 1;
+  } 
+  else if (obj[str[0]]) {
+    obj[str[0]]++;
+  }
+    return letterTally(str.slice(1), obj);
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -305,8 +338,15 @@ var letterTally = function(str, obj) {
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 var compress = function(list) {
+  //base case
+  if(list.length === 0) {
+    return [];
+  }
+  //check and see if the element exist already in the array
+   if (list[0] !== list[1]) {
+  return [list[0]].concat(compress(list.slice(1)));
+  }  return compress(list.slice(1));
 };
-
 // 32. Augment every element in a list with a new value where each element is an array
 // itself.
 // Example: augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
@@ -317,14 +357,27 @@ var augmentElements = function(array, aug) {
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
-};
+  //base case
+  if(array.length === 0) {
+    return [];
+  } //recursive case check and see if the first index and the second index = 0.
+  if(array[0] !== array[1] || array[0] !== 0) {
+    return [array[0]].concat(minimizeZeroes(array.slice(1)));
+  }   return minimizeZeroes(array.slice(1));
+};    
+
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
-  
+  if (array.length === 0) {
+    return [];
+  } //recursive case. We need to change them to alternating signs  
+  if (array.length === 1) {
+    return [Math.abs(array[0])].concat(alternateSign(array.slice(1)));
+  } else return [Math.abs(array[0])].concat([-Math.abs(array[1])]).concat(alternateSign(array.slice(2)));
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
