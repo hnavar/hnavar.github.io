@@ -1,7 +1,14 @@
 /*Functions
 Functions are reusable blocks of code that can take 0 to any number of parameters and return an output.
+
+When the function is created the values within the () are known as parameters.
+
+Once real values are passed in they are known as arguments. 
+
+Functions also have unique scope called function scope which makes variables only accesible from within the function.
+
 A function can be created in many ways, but the primary way to make a reusable, hoisted function 
-is to use the function kyeword, with the function name and a set of paretheses and bracket.
+is to use the function keyword, with the function name and a set of paretheses and bracket.
 
 Here is common notation for a function declaration.
 
@@ -59,8 +66,15 @@ function makeContactList() {
     makeContactList();
     
     
-    // There are also arrow functions and function expressions which are not fully hoisted.
-    // This is how you make a function expression 
+    /* There are also arrow functions and function expressions which are not fully hoisted.
+    
+    While the function is techincally hoisted, the values within a function expression are not, making it not useable if you try to call the function above the expression.
+    
+    This is how you create a function expression 
+    
+    A let, const, or var keyword follower by a name, an equal sign and the function keyword. You also enter any parameters you have
+    at this point and your code block.
+    */
     
     var functionExpression = function() {
         return "Hi I am a function expression";

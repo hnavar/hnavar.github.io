@@ -2,15 +2,18 @@
 // range ///////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function range(num1, num2) {
+function range(num1, num2, inc = 1 ) {
   let rangeArray = [];
+  if(inc < 0 || num1 === num2) {
+    return rangeArray;
+  }
   if (num1 > num2) {
-    for(let i = num2 ; i <= num1; i++) {
+    for(let i = num2 ; i <= num1; i += inc) {
     rangeArray.push(i);  
     } return rangeArray;
   } 
   if (num2 > num1) {
-    for(let i = num1 ; i <= num2; i++) {
+    for(let i = num1 ; i <= num2; i+= inc) {
       rangeArray.push(i);
     }
   } return rangeArray;
@@ -59,43 +62,78 @@ function arrayToList(array) {
 }
 
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // listToArray /////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 function listToArray(list) {
-  let myArray = [];
-  for(let i = 0; i < 1; i++) {
-    myArray.push(list.value);
-    myArray.push(list.rest.value);
-    myArray.push(list.rest.rest.value);
+  var array = [];
+  for(var node = list; node; node = node.rest){
+    array.push(node.value);
   }
-   return myArray;
+  return array;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // prepend /////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function prepend() {
-
+function prepend(element, list){
+  let elementList = {
+   	value: element,
+   	rest: list
+  };
+  return elementList;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // nth /////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+//Input: List(object), value
+//Output: Second value in our list after our input value
 
-function nth() {
-
-}
+function nth(list, value) {
+ for(var node = list; node; node = node.rest) {
+     if (value === 0) {
+    return node.value;
+    } else if (node.rest === null) {
+      return undefined;
+    } else {
+      return nth(list.rest, value - 1);
+    }
+  }
+} 
 
 ////////////////////////////////////////////////////////////////////////////////
 // deepEqual ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function deepEqual() {
-
+function deepEqual(first, second, indentation='') {
+    if (typeof first === typeof second) {
+        if (typeof first === "object") {
+      if (first !== null) {
+        firstKeys = Object.keys(first);
+        secondKeys = Object.keys(second);
+        if (firstKeys.length == secondKeys.length) {
+          trackInequalities = [];
+          for (let i=0; i<= firstKeys.length-1; i++) {
+            trackInequalities.push(deepEqual(first[firstKeys[i]],second[secondKeys[i]], '    '));
+          }
+          return !trackInequalities.includes(false)
+        } else {
+          // Different amount of keys
+          return false;
+        }  
+      } else {
+        // Both are null
+        return true; 
+      }
+        } else {
+            return first === second;
+        }
+    } else {
+        return false;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

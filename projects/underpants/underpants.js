@@ -199,16 +199,17 @@ _.contains = function(array, value) {
 
 
 _.each = function(collection, func) {
-    if (Array.isArray(collection)) {
-        for (var i = 0; i < collection.length; i++) {
-            func(collection[i],  i, collection);
-        }
+  if (Array.isArray(collection)) {
+    for(let i = 0; i < collection.length; i++) {
+        func(collection[i], i, collection);
+      }
     } else {
-        for (var key in collection) {
-            func(collection[key], key, collection);
-        }
+      for(let key in collection) {
+        func(collection[key], key, collection);
+      }
     }
-};
+  };
+  
 
 /** _.unique
 * Arguments:
@@ -332,18 +333,17 @@ _.partition = function(array, func) {
 */
 
 _.map = function(collection, func) {
-    var myArr1 = [];
-    var myArr2 = [];
-    if (Array.isArray(collection)) {
-        for (var i = 0; i < collection.length; i++) {
-           myArr1.push(func(collection[i], i, collection));
-        } return myArr1;
-    } else if (typeof collection === "object") {
-        for (var key in collection) {
-            myArr2.push(func(collection[key], key, collection));
-        }
-    } return myArr2;
-};
+  let myArray1 = [];
+  if(Array.isArray(collection)) {
+    for(let i = 0; i < collection.length; i++) {
+      myArray1.push(func(collection[i], i, collection));
+      } return myArray1;
+    } else if(typeof collection === "object") {
+      for(let key in collection) {
+        myArray1.push(func(collection[key], key, collection));
+      } return myArray1;
+    }
+  };
 
 
 
@@ -493,28 +493,31 @@ _.some = function(collection, func) {
 
 
 _.reduce = function(array, func, seed) {
+  
+  if(seed !== undefined) {
+   
+    for(var i = 0; i < array.length; i++) {
+     
+      seed = func(seed, array[i], i);
       
-     if (seed !== undefined) {
-        
-    for (var i = 0; i < array.length; i++) { 
-            
-            seed = func(array[i], seed, i);
-    }
+    } 
     
     return seed;
-}    
-
- else {
-     
-    seed = array[0];
+    
+  } 
+    else { 
+      
+      seed = array[0];
     
     for(var i = 1; i < array.length; i++) {
-        
-        seed = func(array[i], seed, i);
-    }
-} return seed;
-
+    
+     seed = func(seed, array[i], i);
+    
+    } return seed;
+  } 
 };
+
+
 /** _.extend
 * Arguments:
 *   1) An Object

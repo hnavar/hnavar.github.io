@@ -14,9 +14,25 @@ Common string methods include: .slice(), .length, .split(), .toLowercase(). This
  console.log(textSlice);
  //The Slice method takes two arguments, the stating portion in the string and the stopping portion of the string. It then slices that part of the string out.
  //Returns "Here is so". Notice it doesn't include the 10th index.
+ //Important to note slice is a pure function and does not change the origincal value; 
  
 const textLowerCase = text.toLowerCase();
 console.log(textLowerCase);
 // Expected value is here is some text.
+
+const months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 0, 'Feb');
+// inserts at index 1
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "June"]
+//Important to note this is not pure function!
+//This function can be used on strings and arrays
+
+//The final string method that can be useful is .trim, which essentially trims off all blank space on a string 
+
+'    omg  '.trim(); 
+
+// Expected output "omg"
+
 
 

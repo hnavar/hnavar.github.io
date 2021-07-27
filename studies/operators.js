@@ -1,5 +1,7 @@
 var  Operators = "FUN";
 
+let a = 0;
+
 /* Assignment operators
 Assignment operators are used to assigne value to a variable. The left side operand of the assignment operator is a variable and right side operand of the assignment operator is a value.
 Common assignemnt operators include: =, +=, -=, *=
@@ -50,19 +52,19 @@ The three logical operators commmonly used are &&, ||, and the ! (bang operator)
 // While this looks peculiar this would return true between the two because the || operator is just checking if one is true.
 
 /* Unary oppertors 
-Unary opperators are slightly less known opperators oppertors until you get to loops. 
-+a // Converts to number
--a // Converts to number and negates
-++a // Adds 1 to a and returns new a
-a++ // Adds 1 to a and returns original a
---a // Subtracts 1 from a and returns new a
-a-- // Subtracts 1 from a and returns original a
-These are the most common ones*/
-/*
+Unary opperators are slightly less known opperators oppertors until you get to loops. */
++a; //Converts to number
+-a; //Converts to number and negates
+++a;  //Adds 1 to a and returns new a
+a++; //Adds 1 to a and returns original a
+--a;  //Subtracts 1 from a and returns new a
+a--;  //Subtracts 1 from a and returns original a
+//These are the most common ones
+
 for (var i = 0; i < 5; i++) {
     //Uses the unary opperator to increase i by one each itteration 
     return console.log(i);
-} */
+} 
 
 // the typeOf opperator returns the datatype of a specific primitive data type
 // var typeString = typeof("string");

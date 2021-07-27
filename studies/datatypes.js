@@ -35,11 +35,22 @@
 
   var anArray = [index0, index1, index2];
   
+  //To access a value within an Array, the best way is to use bracket notation.
+  
+  let firstElement = anArray[0];
+  //expected output index0
+  
 /* Our second complex datatype is objects. Objects similar to arrays are deined as complex because they can store multiple different types of data.
    Unlike arrays, objects are not ordered by index, but rather are configured by key value pair. Both arrays and objects have their pros and cons when storing data,
    but most people are agree data in objects is slightly more organized. The sytaxz to create an object is one of our keywords followed by {}. */
    
   var myObject = {key: 23};
+  
+  //To access a key you need to use:
+  Object.keys(myObject); //Gives all keys.
+  
+  //To access the value you simply use dot or bracket notation after the object name
+  let objectKey = myObject.key; //Expected outcome 23
   
   // Nan or Not a Number is returned when you try to do an operation on something that only takes in a number as the argument 
   console.log(parseInt('something'));			// returns -> NaN

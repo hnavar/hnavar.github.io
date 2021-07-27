@@ -35,7 +35,7 @@ var femaleCount = function(array) {
 
 var oldestCustomer = function(array){
     var old = array[0];
-    _.each(array, function(element, index, array){
+    _.each(array, function(element, index, array){              
         old = (element.age > old.age) ? element : old;
     });
     return old.name;
